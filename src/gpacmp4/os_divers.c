@@ -587,9 +587,9 @@ u64 gf_f64_tell(FILE *fp)
 u64 gf_f64_seek(FILE *fp, s64 offset, s32 whence)
 {
 #if defined(_WIN32_WCE)
-	return (u64) fseek(fp, (s32) offset, whence);
+	return (u64) fseek(fp, offset, whence);
 #elif defined(GPAC_CONFIG_WIN32)	/* mingw or cygwin */
-	return (u64) fseek(fp, (s32) offset, whence);
+	return (u64) fseek(fp, offset, whence);
 #elif defined(WIN32)
 	return (u64) _fseeki64(fp, offset, whence);
 #elif defined(GPAC_CONFIG_LINUX) && !defined(GPAC_ANDROID)
@@ -597,7 +597,7 @@ u64 gf_f64_seek(FILE *fp, s64 offset, s32 whence)
 #elif (defined(GPAC_CONFIG_FREEBSD) || defined(GPAC_CONFIG_DARWIN))
 	return fseeko(fp, (off_t) offset, whence);
 #else
-	return fseek(fp, (s32) offset, whence);
+	return fseek(fp, offset, whence);
 #endif
 }
 
